@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Notes + Calculator",
+  "version": "1.0",
+  "description": "A simple Chrome extension with a notes pad and a basic calculator.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Open Notes and Calculator"
+  },
+  "permissions": ["storage"]
+}
