@@ -42,5 +42,4 @@ textarea.addEventListener("click", () => {
   const lines = textarea.value.split("\n");
   const clickedLine = lines[lineIndex] || "";
   calcInput.value = clickedLine.trim();
-  calcInput.select();
 });
