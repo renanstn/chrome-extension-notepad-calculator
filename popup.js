@@ -1,6 +1,5 @@
-const textarea = document.getElementById("note");
+const textarea = document.getElementById("notes");
 const calcInput = document.getElementById("calc-input");
-const calcHistory = document.getElementById("calc-history");
 
 // Load notes on startup
 chrome.storage.local.get(["noteText"], (result) => {
@@ -14,41 +13,34 @@ textarea.addEventListener("input", () => {
   chrome.storage.local.set({ noteText: textarea.value });
 });
 
-// Load calc history
-chrome.storage.local.get(["history"], (result) => {
-  if (result.history) {
-    result.history.forEach((line) => addHistory(line));
-  }
-});
-
 // Listen and calc values
 calcInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     const expression = calcInput.value.trim();
     if (expression) {
+      let line;
       try {
         const result = math.evaluate(expression);
-        const line = `${expression} = ${result}`;
-        addHistory(line);
-        saveHistory();
+        line = `${expression} = ${result}`;
       } catch {
-        addHistory(`${expression} = ERROR`);
-        saveHistory();
+        line = `${expression} = ERROR`;
       }
+      textarea.value += (textarea.value ? "\n" : "") + line;
+      chrome.storage.local.set({ noteText: textarea.value });
     }
     calcInput.value = "";
   }
 });
 
-function addHistory(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  calcHistory.appendChild(div);
-  calcHistory.scrollTop = calcHistory.scrollHeight;
-}
-
-function saveHistory() {
-  const lines = Array.from(calcHistory.children).map((div) => div.textContent);
-  chrome.storage.local.set({ history: lines });
-}
+// Listen clicks on text area, and load values back to calc input
+textarea.addEventListener("click", () => {
+  const pos = textarea.selectionStart;
+  const textBefore = textarea.value.slice(0, pos);
+  const linesBefore = textBefore.split("\n");
+  const lineIndex = linesBefore.length - 1;
+  const lines = textarea.value.split("\n");
+  const clickedLine = lines[lineIndex] || "";
+  calcInput.value = clickedLine.trim();
+  calcInput.select();
+});
