@@ -11,7 +11,7 @@ A pedido do meu amorzinho, pois a extensão similar que ela utilizava para traba
 
 ## Stack
 
-É só um html, um javascript, e um CSS paizão. Não tem segredo!
+É só um HTML, um javascript, e um CSS paizão. Não tem segredo!
 
 ## Instalando
 
