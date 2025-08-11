@@ -7,6 +7,11 @@ chrome.storage.local.get(["noteText"], (result) => {
     textarea.value = result.noteText;
   }
 });
+chrome.storage.local.get(["inputText"], (result) => {
+  if (result.inputText) {
+    calcInput.value = result.inputText;
+  }
+});
 
 // Listen and store notes
 textarea.addEventListener("input", () => {
@@ -42,4 +47,5 @@ textarea.addEventListener("click", () => {
   const lines = textarea.value.split("\n");
   const clickedLine = lines[lineIndex] || "";
   calcInput.value = clickedLine.trim();
+  chrome.storage.local.set({ inputText: calcInput.value });
 });
