@@ -17,7 +17,7 @@
       "32": "calculator.png",
       "48": "calculator.png",
       "128": "calculator.png"
-    },
+    }
   },
   "permissions": ["storage"]
 }
