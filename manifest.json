@@ -3,9 +3,21 @@
   "name": "Notes + Calculator",
   "version": "1.0",
   "description": "A simple Chrome extension with a notes pad and a basic calculator.",
+  "icons": {
+    "16": "calculator.png",
+    "32": "calculator.png",
+    "48": "calculator.png",
+    "128": "calculator.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Open Notes and Calculator"
+    "default_title": "Open Notes and Calculator",
+    "default_icon": {
+      "16": "calculator.png",
+      "32": "calculator.png",
+      "48": "calculator.png",
+      "128": "calculator.png"
+    },
   },
   "permissions": ["storage"]
 }
